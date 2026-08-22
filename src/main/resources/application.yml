@@ -1,0 +1,48 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: financial-transaction-engine
+  threads:
+    virtual:
+      enabled: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/payment_db
+    username: postgres
+    password: postgrespassword
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: all
+      retries: 3
+    consumer:
+      group-id: payment-settlement-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics

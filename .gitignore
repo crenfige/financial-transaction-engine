@@ -1,0 +1,23 @@
+Set-Content -Path .gitignore -Value @'
+# Compilación Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# IntelliJ IDEA y editores
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.vscode/
+
+# Logs y temporales del sistema
+*.log
+.DS_Store
+Thumbs.db
+crash-*.dump
+'@ -Encoding utf8
